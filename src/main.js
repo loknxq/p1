@@ -1,43 +1,67 @@
+// Обработка модального окна
 const dlg = document.getElementById('contactDialog');
 const openBtn = document.getElementById('openDialog');
 const closeBtn = document.getElementById('closeDialog');
 const form = document.getElementById('contactForm');
 let lastActive = null;
-openBtn.addEventListener('click', () => {
-    lastActive = document.activeElement;
-    dlg.showModal(); // модальный режим + затемнение
-    dlg.querySelector('input,select,textarea,button')?.focus();
-});
-closeBtn.addEventListener('click', () => dlg.close('cancel'));
-form?.addEventListener('submit', (e) => {
-    form?.addEventListener('submit', (e) => {
-        // 1) Сброс кастомных сообщений
-        [...form.elements].forEach(el => el.setCustomValidity?.(''));
 
-        // 2) Проверка встроенных ограничений
+if (openBtn && dlg) {
+    openBtn.addEventListener('click', () => {
+        lastActive = document.activeElement;
+        dlg.showModal();
+        // Фокус на первое поле формы
+        const firstInput = dlg.querySelector('input, select, textarea, button');
+        if (firstInput) firstInput.focus();
+    });
+}
+
+if (closeBtn) {
+    closeBtn.addEventListener('click', () => dlg.close('cancel'));
+}
+
+if (form) {
+    form.addEventListener('submit', (e) => {
+        // Сброс кастомных сообщений
+        [...form.elements].forEach(el => {
+            if (el.setCustomValidity) el.setCustomValidity('');
+            el.removeAttribute('aria-invalid');
+        });
+
+        // Проверка валидации
         if (!form.checkValidity()) {
             e.preventDefault();
 
-            // Пример кастомных сообщений
             const email = form.elements.email;
-            if (email?.validity.typeMismatch) {
+            if (email && email.validity.typeMismatch) {
                 email.setCustomValidity('Введите корректный e-mail, например name@example.com');
+            }
+
+            const phone = form.elements.phone;
+            if (phone && phone.validity.patternMismatch) {
+                phone.setCustomValidity('Формат: +7 (900) 000-00-00');
             }
 
             form.reportValidity();
 
             // Подсветка ошибок
             [...form.elements].forEach(el => {
-                if (el.willValidate) el.toggleAttribute('aria-invalid', !el.checkValidity());
+                if (el.willValidate && !el.checkValidity()) {
+                    el.setAttribute('aria-invalid', 'true');
+                }
             });
             return;
         }
 
-        // 3) Успешная отправка
         e.preventDefault();
-        dlg.close('success');
+        if (dlg) dlg.close('success');
+
+        alert('Сообщение отправлено!');
         form.reset();
     });
-});
-dlg.addEventListener('close', () => { lastActive?.focus(); });
-// Esc по умолчанию вызывает событие 'cancel' и закрывает <dialog>
+}
+
+if (dlg) {
+    dlg.addEventListener('close', () => {
+        if (lastActive) lastActive.focus();
+    });
+}
