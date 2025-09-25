@@ -1,62 +1,108 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сайтик</title>
-    <meta name="description" content="Сайт для практик">
+    <title>Главная - Сайтик</title>
+    <meta name="description" content="Сайт для практик по фронтенд разработке">
     <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <!-- Шапка сайта -->
-    <header>
-        <a href="/">Сайтик</a> 
-        <!-- Главное меню навигации -->
-        <nav>
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="about.html">О нас</a></li>
-                <li><a href="contacts.html">Контакты</a></li>
+    <header class="site-header">
+        <a class="site-header__brand" href="index.html">Сайтик</a>
+        <nav class="site-nav" aria-label="Основная навигация">
+            <ul class="site-nav__list">
+                <li class="site-nav__item">
+                    <a class="site-nav__link site-nav__link--active" href="index.html">Главная</a>
+                </li>
+                <li class="site-nav__item">
+                    <a class="site-nav__link" href="about.html">О нас</a>
+                </li>
+                <li class="site-nav__item">
+                    <a class="site-nav__link site-nav__link--cta" href="contacts.html">Связаться</a>
+                </li>
             </ul>
         </nav>
     </header>
 
-    <!-- Уникальное основное содержимое страницы -->
     <main>
-        <h1>Добро пожаловать на наш сайт!</h1>
-
-        <!-- Секция 1 с якорем -->
-        <section id="services">
-            <h2>Наши услуги</h2>
-            <p>Описание предоставляемых услуг...</p>
-            <a href="#contacts">Связаться с нами</a> <!-- Якорная ссылка внутри страницы -->
+        <!-- Герой-секция с фоновым изображением -->
+        <section class="hero" style="--bg-image: url('../assets/portfolio/project1-900.jpg')">
+            <div class="container">
+                <h1>Добро пожаловать на наш сайт!</h1>
+                <p>Мы создаем качественные веб-решения</p>
+                <a href="#portfolio" class="button button--primary">Смотреть работы</a>
+            </div>
         </section>
 
-        <!-- Секция 2 с якорем -->
-        <section id="Portfolio">
-            <h2>Портфолио</h2>
-            <p>Примеры наших работ...</p>
-            <div class="portfolio-grid">
-            <img src="../assets/portfolio/project1.jpg" alt="Проект 1" width="300" height="200">
-            <img src="../assets/portfolio/project2.jpg" alt="Проект 2" width="300" height="200">
-            <img src="../assets/portfolio/project3.jpg" alt="Проект 3" width="300" height="200">
-            <img src="../assets/portfolio/project4.jpg" alt="Проект 4" width="300" height="200">
-            <img src="../assets/portfolio/project5.jpg" alt="Проект 5" width="300" height="200">
-            <img src="../assets/portfolio/project6.jpg" alt="Проект 6" width="300" height="200">
+        <!-- Секция услуг -->
+        <section id="services" class="section">
+            <div class="container">
+                <h2>Наши услуги</h2>
+                <p>Описание предоставляемых услуг...</p>
+                <a href="#contacts" class="button">Связаться с нами</a>
+            </div>
         </section>
 
-        <!-- Секция 3 с якорем -->
-        <section id="contacts">
-            <h2>Контактная информация</h2>
-            <p>Наши контакты...</p>
-            <a href="contacts.html">Подробнее</a> <!-- Ссылка на отдельную страницу -->
+        <!-- Секция портфолио -->
+        <section id="portfolio" class="portfolio section">
+            <div class="container">
+                <h2 class="portfolio__title">Портфолио</h2>
+                <p class="portfolio__description">Картинки...</p>
+
+                <div class="portfolio__grid">
+                    <div class="portfolio__item">
+                        <img class="portfolio__img" src="../assets/portfolio/project1.jpg" alt="Проект 1">
+                        <p class="portfolio__caption">Проект 1</p>
+                    </div>
+
+                    <div class="portfolio__item">
+                        <img class="portfolio__img" src="../assets/portfolio/project2.jpg" alt="Проект 2">
+                        <p class="portfolio__caption">Проект 2</p>
+                    </div>
+
+                    <div class="portfolio__item">
+                        <img class="portfolio__img" src="../assets/portfolio/project3.jpg" alt="Проект 3">
+                        <p class="portfolio__caption">Проект 3</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция с видео -->
+        <section class="video-section section">
+            <div class="container">
+                <h2 class="video-section__title">Наше видео</h2>
+                <div class="media">
+                    <video controls width="800" height="450" poster="../assets/videos/poster.jpg" class="media__video">
+                        <source src="../assets/videos/video1.mp4" type="video/mp4">
+                        Ваш браузер не поддерживает видео.
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция контактов -->
+        <section id="contacts" class="section">
+            <div class="container">
+                <h2>Контактная информация</h2>
+                <p>Наши контакты...</p>
+                <a href="contacts.html" class="button button--primary">Подробнее</a>
+            </div>
         </section>
     </main>
 
-    <!-- Подвал сайта -->
-    <footer>
-        <p>&copy; 2025 Сайтик. Все права защищены.</p>
-        <p>Телефон: +7 (123) 456-78-90</p>
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2025 Сайтик. Все права защищены.</p>
+            <p>Телефон: +7 (123) 456-78-90</p>
+        </div>
     </footer>
+
+    <script src="main.js" defer></script>
 </body>
+
 </html>

@@ -1,0 +1,310 @@
+:root {
+  /* Палитра */
+  --color-bg: #b9d6d672;
+  --color-fg: #0b0b0b;
+  --color-muted: #384188;
+  --color-primary: #114375;
+  --color-danger: #b00020;
+
+  /* Цвета для градиента */
+    --gradient-color-1: #667eea;
+    --gradient-color-2: #cd87e063;
+    --main-gradient: linear-gradient(135deg, var(--gradient-color-1) 0%, var(--gradient-color-2) 100%);
+
+  /* Типографика и размеры */
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+
+  /* Скругления и тени */
+  --radius: 12px;
+  --shadow: 0 1px 2px rgba(0,0,0,.08), 0 8px 24px rgba(0,0,0,.08);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { 
+  background: var(--color-bg); 
+  color: var(--color-fg); 
+  font-family: var(--font-body); 
+  line-height: 1.5; 
+}
+
+/* Плавная прокрутка */
+html { scroll-behavior: smooth; }
+
+/* Подсветка якоря */
+:target { 
+  outline: 2px dashed var(--color-primary); 
+  outline-offset: 4px; 
+}
+
+/* Контейнер */
+.container {
+  width: min(100% - 2 * var(--space-4), 1200px);
+  margin-inline: auto;
+}
+
+/* Секции */
+.section {
+  padding: var(--space-5) 0;
+}
+
+/* Шапка */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-muted);
+}
+
+.site-header__brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--color-fg);
+}
+
+/* Навигация */
+.site-nav__list {
+  display: flex;
+  gap: var(--space-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav__link {
+  text-decoration: none;
+  color: var(--color-muted);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  transition: all 0.2s;
+}
+
+.site-nav__link:hover,
+.site-nav__link:focus {
+  color: var(--color-fg);
+  background: rgba(0,0,0,0.05);
+}
+
+.site-nav__link--active {
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+.site-nav__link--cta {
+  background: var(--color-primary);
+  color: white;
+}
+
+.site-nav__link--cta:hover {
+  background: #0070e0;
+}
+
+/* Хлебные крошки */
+.breadcrumbs {
+  margin-bottom: var(--space-4);
+  font-size: 0.9rem;
+}
+
+.breadcrumbs a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+/* Герой-секция */
+.hero {
+  background: 
+    linear-gradient(to top, rgba(85, 109, 143, 0.597), rgba(113, 98, 227, 0.2)),
+    var(--bg-image, none) center/cover no-repeat;
+  color: white;
+  padding: var(--space-5) var(--space-4);
+  text-align: center;
+  margin-bottom: var(--space-5);
+}
+
+.hero h1 {
+  margin: 0 0 var(--space-3);
+  font-size: 2.5rem;
+}
+
+/* Кнопки */
+.button {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--color-primary);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.button--primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+/* Портфолио */
+.portfolio__title {
+  text-align: center;
+  margin: 0 0 var(--space-3);
+  font-size: 2rem;
+}
+
+.portfolio__description {
+  text-align: center;
+  margin: 0 0 var(--space-4);
+  color: var(--color-muted);
+}
+
+.portfolio__grid {
+    display: flex; /* Располагаем элементы в ряд */
+    gap: 20px; /* Расстояние между карточками */
+    justify-content: center; /* Выравнивание по центру */
+    flex-wrap: nowrap; /* Запрещаем перенос на новую строку */
+    overflow-x: auto; /* Добавляем горизонтальный скролл если не помещается */
+    padding: 10px 0;
+}
+
+.portfolio__item {
+    flex: 0 0 auto; /* Не позволяем элементам растягиваться/сжиматься */
+    width: 300px; /* Фиксированная ширина карточки */
+    text-align: center;
+}
+
+.portfolio__img {
+    width: 100%; /* Картинка занимает всю ширину карточки */
+    height: 300px;
+    object-fit: cover; /* Обрезаем картинку чтобы заполнить область */
+    border-radius: 8px;
+}
+
+.portfolio__caption {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.portfolio__item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+}
+
+/* Видео */
+.video-section__title {
+  text-align: center;
+  margin: 0 0 var(--space-4);
+}
+
+.media {
+  aspect-ratio: 16/9;
+  width: min(100%, 800px);
+  margin: 0 auto;
+}
+
+.media__video {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius);
+  border: none;
+}
+
+/* Форма */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.form__label {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-weight: 500;
+}
+
+.form__input,
+.form__select,
+.form__textarea {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-muted);
+  border-radius: var(--radius);
+  font: inherit;
+}
+
+.form__input:focus,
+.form__select:focus,
+.form__textarea:focus {
+  border-color: var(--color-primary);
+}
+
+.form__help {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+/* Модалка */
+.dialog {
+  padding: var(--space-4);
+  border: none;
+  border-radius: var(--radius);
+  width: min(90vw, 500px);
+}
+
+.dialog::backdrop {
+  background: rgba(0,0,0,0.5);
+}
+
+/* Кнопки формы */
+.form-actions {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  justify-content: flex-end;
+}
+
+/* Футер */
+.site-footer {
+  background: var(--color-muted);
+  color: white;
+  padding: var(--space-4) 0;
+  text-align: center;
+  margin-top: var(--space-5);
+}
+
+/* Фокус для доступности */
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Состояния */
+:disabled, [aria-disabled="true"] {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+[aria-invalid="true"] {
+  border-color: var(--color-danger);
+}
+
+.portfolio__img {
+  margin: 2%;
+  max-width: 95%;
+  border-radius: 5px;
+}
